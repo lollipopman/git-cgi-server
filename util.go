@@ -1,4 +1,4 @@
-package main
+package gitcgiserver
 
 import (
 	"bytes"
@@ -29,12 +29,12 @@ func findBackendCGI() (string, error) {
 	return filepath.Join(string(dir), "git-http-backend"), nil
 }
 
-func writePIDFile(file string) error {
+func WritePIDFile(file string) error {
 	pid := strconv.Itoa(os.Getpid())
 	return ioutil.WriteFile(file, []byte(pid), 0644)
 }
 
-func removePIDFile(file string) error {
+func RemovePIDFile(file string) error {
 	err := os.Remove(file)
 	if err != nil && !os.IsNotExist(err) {
 		return err

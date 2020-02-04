@@ -10,6 +10,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	gitcgiserver "github.com/pasela/git-cgi-server"
 )
 
 const (
@@ -74,7 +76,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	server := &GitCGIServer{
+	server := &gitcgiserver.GitCGIServer{
 		ProjectRoot:     args.ProjectRoot,
 		ExportAll:       args.ExportAll,
 		BackendCGI:      args.BackendCGI,
@@ -101,10 +103,10 @@ func main() {
 	}()
 
 	if args.PID != "" {
-		if err := writePIDFile(args.PID); err != nil {
+		if err := gitcgiserver.WritePIDFile(args.PID); err != nil {
 			log.Fatalln(err)
 		}
-		defer removePIDFile(args.PID)
+		defer gitcgiserver.RemovePIDFile(args.PID)
 	}
 
 	log.Printf("Starting HTTP server on %s (PID=%d)\n", args.Addr, os.Getpid())
