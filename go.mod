@@ -1,4 +1,4 @@
-module github.com/pasela/git-cgi-server
+module github.com/lollipopman/git-cgi-server
 
 go 1.13
 

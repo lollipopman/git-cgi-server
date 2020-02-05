@@ -11,7 +11,7 @@ import (
 	"syscall"
 	"time"
 
-	gitcgiserver "github.com/pasela/git-cgi-server"
+	gitcgiserver "github.com/lollipopman/git-cgi-server"
 )
 
 const (
