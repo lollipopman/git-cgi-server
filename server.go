@@ -1,4 +1,4 @@
-package gitcgiserver
+package main
 
 import (
 	"bytes"
@@ -28,7 +28,7 @@ type GitCGIServer struct {
 	ShutdownTimeout time.Duration
 	MustClose       bool
 	httpServer      *http.Server
-	maxClients      int
+	MaxClients      int
 }
 
 func (s *GitCGIServer) Serve() error {
@@ -48,8 +48,8 @@ func (s *GitCGIServer) Serve() error {
 
 	s.URIPrefix = subtreePath(s.URIPrefix)
 	mux := http.NewServeMux()
-	if s.maxClients > 0 {
-		mux.HandleFunc(s.URIPrefix, limitNumClients(s.getHandler(), s.maxClients))
+	if s.MaxClients > 0 {
+		mux.HandleFunc(s.URIPrefix, limitNumClients(s.getHandler(), s.MaxClients))
 	} else {
 		mux.HandleFunc(s.URIPrefix, s.getHandler())
 	}
